@@ -1,0 +1,22 @@
+.Hero {
+  .heroText {
+    font-size: 4em;
+  }
+}
+
+@media (max-width: 600px) {
+  .Hero {
+    .p-20 {
+      padding: 5%;
+      // color: #3b82f680;
+
+      .heroText {
+        font-size: 3rem;
+
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+}

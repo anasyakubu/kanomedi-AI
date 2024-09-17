@@ -1,7 +1,12 @@
-import React from "react";
+// import React from "react";
+import Hero from "../../sections/Hero/Hero";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="Home text-white">
+      <Hero />
+    </div>
+  );
 };
 
 export default Home;
