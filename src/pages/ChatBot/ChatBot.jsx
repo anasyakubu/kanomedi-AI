@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IoMenuOutline } from "react-icons/io5";
+import { FaTimes } from "react-icons/fa";
 
 const ChatBotUI = () => {
   const [messages, setMessages] = useState([]);
@@ -38,16 +40,13 @@ const ChatBotUI = () => {
         }`}
       >
         <div className="p-4 text-2xl font-bold border-b border-gray-700">
-          ChatGPT Bot
+          KMA Bot
         </div>
         <div className="flex-1 p-4 overflow-y-auto">
           <div className="font-semibold text-gray-400 mb-4">Conversations</div>
           <ul>
             <li className="p-2 hover:bg-gray-700 cursor-pointer">
               Conversation 1
-            </li>
-            <li className="p-2 hover:bg-gray-700 cursor-pointer">
-              Conversation 2
             </li>
           </ul>
         </div>
@@ -63,9 +62,14 @@ const ChatBotUI = () => {
             className="md:hidden bg-gray-800 text-white px-4 py-2 rounded-lg"
             onClick={toggleSidebar}
           >
-            {isSidebarOpen ? "Hide Conversations" : "Show Conversations"}
+            {isSidebarOpen ? <FaTimes /> : <IoMenuOutline />}
           </button>
         </div>
+        {/* Hints */}
+
+        {/* <div className="">
+          <h2>KANO Med</h2>
+        </div> */}
 
         {/* Chat Messages */}
         <div className="flex-1 p-4 overflow-y-auto">
@@ -81,7 +85,8 @@ const ChatBotUI = () => {
                   message.fromUser
                     ? "bg-blue-500 text-white"
                     : "bg-gray-300 text-black"
-                } p-3 rounded-lg max-w-xs mb-2`}
+                } p-3 rounded-lg max-w-xs lg:max-w-md break-words mb-2`}
+                style={{ wordWrap: "break-word", overflowWrap: "break-word" }} // Optional inline styles for older browser support
               >
                 {message.text}
               </div>
@@ -92,13 +97,16 @@ const ChatBotUI = () => {
         {/* Chat Input */}
         <div className="p-4 border-t bg-white">
           <form onSubmit={handleSendMessage} className="flex">
-            <input
+            {/* <input
+             
+            /> */}
+            <textarea
               className="flex-1 border rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              placeholder="Type your message..."
+              placeholder="Enter your symptoms..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-            />
+            ></textarea>
             <button
               type="submit"
               className="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600"
