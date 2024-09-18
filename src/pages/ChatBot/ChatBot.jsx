@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMenuOutline } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
+import he from "he";
 // import Logo from "../../assets/med.png";
 
 const ChatBotUI = () => {
@@ -118,8 +119,9 @@ const ChatBotUI = () => {
                     : "bg-gray-300 text-black"
                 } p-3 rounded-lg max-w-xs lg:max-w-md break-words mb-2`}
                 style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
+                dangerouslySetInnerHTML={{ __html: he.decode(message.text) }}
               >
-                {message.text}
+                {/* {message.text} */}
               </div>
             </div>
           ))}
