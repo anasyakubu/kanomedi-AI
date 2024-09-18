@@ -119,7 +119,9 @@ const ChatBotUI = () => {
                 } p-3 rounded-lg shadow-md max-w-xs lg:max-w-md break-words`}
                 style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
                 // dangerouslySetInnerHTML={{ __html: he.decode(message.text) }}
-                dangerouslySetInnerHTML={{ __html: message.text }}
+                dangerouslySetInnerHTML={{
+                  __html: message.text.replace(/\*/g, ""),
+                }}
               />
             </div>
           ))}
