@@ -71,9 +71,10 @@ const RegisterContent = () => {
       }
       console.log("User Registered Successfully!!");
       toast.success("User Registered Successfully!!");
+      window.location.href = "/profile";
     } catch (error) {
       console.log(error);
-      toast.error("Error Encounter...", {
+      toast.error("Error Encounter..." + error, {
         position: "bottom-center",
       });
     }

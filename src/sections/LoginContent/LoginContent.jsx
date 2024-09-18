@@ -55,7 +55,7 @@ const LoginContent = () => {
       });
     } catch (error) {
       console.log(error);
-      toast.error("Error Encounter", {
+      toast.error("Error Encounter" + error, {
         position: "top-center",
       });
     }
