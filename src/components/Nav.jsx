@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../assets/react.svg";
+import Logo from "../assets/med.png";
 import { GoLinkExternal } from "react-icons/go";
 
 // import "./shared.scss";
