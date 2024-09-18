@@ -1,0 +1,25 @@
+.LoginContent {
+  .label-style {
+    @apply text-sm font-extralight;
+  }
+  .input-style {
+    @apply w-full p-4 mt-3 text-sm outline-none border border-white text-black rounded-md;
+  }
+
+  .btn {
+    @apply px-16 bg-white mt-2 text-black p-3 rounded-3xl text-lg;
+  }
+
+  .google-btn {
+    @apply border border-white p-5 w-full flex justify-center gap-2 rounded-full;
+  }
+}
+
+@media (max-width: 600px) {
+  .LoginContent {
+    .p-10 {
+      margin-top: 10%;
+      padding: 5%;
+    }
+  }
+}

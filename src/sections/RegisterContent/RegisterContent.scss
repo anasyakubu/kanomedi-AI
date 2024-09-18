@@ -1,0 +1,28 @@
+.RegisterContent {
+  .label-style {
+    @apply text-sm font-extralight;
+  }
+  .input-style {
+    @apply w-full p-4 mt-3 text-sm outline-none border border-white text-black rounded-md;
+  }
+
+  .btn {
+    @apply w-full bg-white text-black p-4 rounded-full text-lg;
+  }
+
+  .google-btn {
+    @apply border border-white p-5 w-full flex justify-center gap-2 rounded-full;
+  }
+}
+
+@media (max-width: 600px) {
+  .RegisterContent {
+    .p-64 {
+      padding: 5%;
+
+      // .mt-5 {
+      //   margin-top: 5%;
+      // }
+    }
+  }
+}

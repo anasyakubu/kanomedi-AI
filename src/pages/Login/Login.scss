@@ -1,0 +1,16 @@
+.Login {
+  height: 100vh;
+  .Banner {
+    // background-image: url("../../assets/Login-banner.jpg");
+    background-color: #fff;
+    height: 100vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .Login {
+    .Banner {
+      display: none;
+    }
+  }
+}
