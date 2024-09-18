@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../assets/med.png";
+import Logo from "../assets/mimee (1).png";
 import { GoLinkExternal } from "react-icons/go";
 
 // import "./shared.scss";
@@ -29,7 +29,7 @@ export default function Nav() {
           <div className="flex lg:flex-1 ">
             <a href="/" className="-m-1.5 p-1.5">
               {/* <span className="sr-only">Explained</span> */}
-              <img className="h-16 w-auto" src={Logo} alt="Logo" />
+              <img className="h-12 w-auto" src={Logo} alt="Logo" />
             </a>
           </div>
 

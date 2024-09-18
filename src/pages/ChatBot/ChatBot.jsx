@@ -1,32 +1,55 @@
 import { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMenuOutline } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
+// import Logo from "../../assets/med.png";
 
 const ChatBotUI = () => {
+  const API_KEY = import.meta.env.VITE_GOOGLE_GENERATIVE_AI_API_KEY;
+  const genAI = new GoogleGenerativeAI(API_KEY);
+
+  const [aiResponse, setAiResponse] = useState("");
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar visibility
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  // Handle sending message
+  /**
+   * Generative AI Call to fetch text insights
+   */
+  async function aiRun(prompt) {
+    setLoading(true);
+    setAiResponse("");
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContent(prompt);
+      const responseText = result.response.text();
+      setAiResponse(responseText);
+
+      // Append AI response to messages
+      const newMessages = [
+        ...messages,
+        { text: prompt, fromUser: true },
+        { text: responseText, fromUser: false },
+      ];
+      setMessages(newMessages);
+    } catch (error) {
+      console.error("AI Error: ", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (input.trim()) {
       const newMessages = [...messages, { text: input, fromUser: true }];
       setMessages(newMessages);
-      setInput("");
-
-      // Simulate bot reply after a short delay
-      setTimeout(() => {
-        const botReply = {
-          text: `Bot: You said "${input}"`, // Customize bot reply logic here
-          fromUser: false,
-        };
-        setMessages((prevMessages) => [...prevMessages, botReply]);
-      }, 1000);
+      aiRun(input); // Run AI after sending user message
+      setInput(""); // Clear input after sending
     }
   };
 
-  // Toggle Sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -65,11 +88,19 @@ const ChatBotUI = () => {
             {isSidebarOpen ? <FaTimes /> : <IoMenuOutline />}
           </button>
         </div>
-        {/* Hints */}
 
-        {/* <div className="">
-          <h2>KANO Med</h2>
-        </div> */}
+        {/* Logo Area */}
+        <div
+          className="flex justify-center text-center py-2"
+          style={{ height: "10vh" }}
+        >
+          <div className="">
+            {/* <img src={Logo} alt="Logo" className="w-full h-full" /> */}
+            <h1 className="text-3xl font-semibold">Health Bolt</h1>
+            <p className="py-2">Enter your symptoms</p>
+          </div>
+        </div>
+        {/* Logo Area */}
 
         {/* Chat Messages */}
         <div className="flex-1 p-4 overflow-y-auto">
@@ -86,7 +117,7 @@ const ChatBotUI = () => {
                     ? "bg-blue-500 text-white"
                     : "bg-gray-300 text-black"
                 } p-3 rounded-lg max-w-xs lg:max-w-md break-words mb-2`}
-                style={{ wordWrap: "break-word", overflowWrap: "break-word" }} // Optional inline styles for older browser support
+                style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
               >
                 {message.text}
               </div>
@@ -97,12 +128,8 @@ const ChatBotUI = () => {
         {/* Chat Input */}
         <div className="p-4 border-t bg-white">
           <form onSubmit={handleSendMessage} className="flex">
-            {/* <input
-             
-            /> */}
             <textarea
               className="flex-1 border rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="text"
               placeholder="Enter your symptoms..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -111,7 +138,7 @@ const ChatBotUI = () => {
               type="submit"
               className="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600"
             >
-              Send
+              {loading ? "Loading..." : "Send"}
             </button>
           </form>
         </div>
