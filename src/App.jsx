@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import ChatBotUI from "./pages/ChatBot/ChatBot";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/auth" element={<Login />} />
+              <Route path="/ChatBotUI" element={<ChatBotUI />} />
             </Routes>
           </BrowserRouter>
         </div>
