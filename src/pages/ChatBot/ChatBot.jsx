@@ -3,7 +3,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMenuOutline } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
 import he from "he";
-// import Logo from "../../assets/med.png";
 
 const ChatBotUI = () => {
   const API_KEY = import.meta.env.VITE_GOOGLE_GENERATIVE_AI_API_KEY;
@@ -23,7 +22,7 @@ const ChatBotUI = () => {
     setAiResponse("");
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(prompt);
+      const result = await model.generateContent(` ${prompt}`);
       const responseText = result.response.text();
       setAiResponse(responseText);
 
@@ -79,7 +78,7 @@ const ChatBotUI = () => {
       {/* Chat Area */}
       <div className="flex flex-col w-full">
         {/* Chat Header */}
-        <div className="bg-white border-b p-4 flex justify-between items-center">
+        <div className="bg-white border-b p-4 flex justify-between items-center shadow-lg">
           <h2 className="text-lg font-semibold">Chat</h2>
           {/* Button to toggle sidebar */}
           <button
@@ -92,53 +91,52 @@ const ChatBotUI = () => {
 
         {/* Logo Area */}
         <div
-          className="flex justify-center text-center py-2"
+          className="flex justify-center text-center py-2 bg-blue-50 shadow-md"
           style={{ height: "10vh" }}
         >
           <div className="">
-            {/* <img src={Logo} alt="Logo" className="w-full h-full" /> */}
-            <h1 className="text-3xl font-semibold">Health Bolt</h1>
-            <p className="py-2">Enter your symptoms</p>
+            <h1 className="text-3xl font-semibold text-blue-600">
+              Health Bolt
+            </h1>
+            <p className="py-2 text-gray-600">Enter your symptoms</p>
           </div>
         </div>
-        {/* Logo Area */}
 
         {/* Chat Messages */}
-        <div className="flex-1 p-4 overflow-y-auto">
+        <div className="flex-1 p-4 overflow-y-auto bg-white">
           {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${
                 message.fromUser ? "justify-end" : "justify-start"
-              }`}
+              } mb-4`}
             >
               <div
                 className={`${
                   message.fromUser
                     ? "bg-blue-500 text-white"
                     : "bg-gray-300 text-black"
-                } p-3 rounded-lg max-w-xs lg:max-w-md break-words mb-2`}
+                } p-3 rounded-lg shadow-md max-w-xs lg:max-w-md break-words`}
                 style={{ wordWrap: "break-word", overflowWrap: "break-word" }}
-                dangerouslySetInnerHTML={{ __html: he.decode(message.text) }}
-              >
-                {/* {message.text} */}
-              </div>
+                // dangerouslySetInnerHTML={{ __html: he.decode(message.text) }}
+                dangerouslySetInnerHTML={{ __html: message.text }}
+              />
             </div>
           ))}
         </div>
 
         {/* Chat Input */}
-        <div className="p-4 border-t bg-white">
+        <div className="p-4 border-t bg-gray-50">
           <form onSubmit={handleSendMessage} className="flex">
             <textarea
-              className="flex-1 border rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 border rounded-l-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
               placeholder="Enter your symptoms..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
             ></textarea>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 shadow-md"
             >
               {loading ? "Loading..." : "Send"}
             </button>
