@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { IoMenuOutline } from "react-icons/io5";
 import { FaTimes } from "react-icons/fa";
-import he from "he";
+// import he from "he";
 
 const ChatBotUI = () => {
   const API_KEY = import.meta.env.VITE_GOOGLE_GENERATIVE_AI_API_KEY;
